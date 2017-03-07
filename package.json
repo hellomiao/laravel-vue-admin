@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "node node_modules/cross-env/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "devDependencies": {
+    "axios": "^0.15.3",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "bootstrap-sass": "^3.3.7",
+    "eslint": "^3.16.1",
+    "jquery": "^3.1.1",
+    "laravel-mix": "^0.7.2",
+    "lodash": "^4.17.4",
+    "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "admin-lte": "^2.3.11",
+    "bootstrap3-dialog": "^1.35.3",
+    "css-loader": "^0.26.1",
+    "gulp": "^3.9.1",
+    "vue-core-image-upload": "^2.0.5",
+    "vue-msgbox": "^0.2.14"
+  }
+}

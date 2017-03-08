@@ -41,7 +41,7 @@
                     <template slot="actions" scope="item">
                         <div class="btn-group">
                             <a href="#" @click.prevent="view(item.item.id)" class="btn btn-success btn-xs">查看</a>
-                            <a href="#" @click.prevent="msgBox(item.item)" class="btn btn-info
+                            <a href="#" @click.prevent="msgBox(item.item)" v-if="can('admin.user.msg')&&item.item.id!=$store.state.uid" class="btn btn-info
                              btn-xs">消息</a>
                             <router-link :to="{ path: 'update/'+item.item.id}" class="btn bg-orange btn-xs">编辑
                             </router-link>

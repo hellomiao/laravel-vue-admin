@@ -25570,7 +25570,8 @@ var websocket = function websocket(state) {
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex___default.a);
 
 var state = {
-    websocket: Object
+    websocket: Object,
+    uid: window.User.id
 };
 
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_1_vuex___default.a.Store({
@@ -57637,7 +57638,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.view(item.item.id)
             }
           }
-        }, [_vm._v("查看")]), _vm._v(" "), _c('a', {
+        }, [_vm._v("查看")]), _vm._v(" "), (_vm.can('admin.user.msg') && item.item.id != _vm.$store.state.uid) ? _c('a', {
           staticClass: "btn btn-info\n                         btn-xs",
           attrs: {
             "href": "#"
@@ -57648,7 +57649,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
               _vm.msgBox(item.item)
             }
           }
-        }, [_vm._v("消息")]), _vm._v(" "), _c('router-link', {
+        }, [_vm._v("消息")]) : _vm._e(), _vm._v(" "), _c('router-link', {
           staticClass: "btn bg-orange btn-xs",
           attrs: {
             "to": {

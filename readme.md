@@ -28,29 +28,29 @@
   ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/logger.png)
   
   
-  ###前端vue权限方法,can('别名')
+###前端vue权限方法,can('别名')
   
-  ```
-  v-if="can('admin.user.create')"
-  ```
+```
+v-if="can('admin.user.create')"
+```
  
  
-  ###启动swoole websocket服务
+###启动swoole websocket服务
   
-    ```
-    php artisan swoole start
-    ```
+```
+php artisan swoole start
+```
+
+websocket连接储存在Store模块里
     
-    websocket连接储存在Store模块里
-    
-     ```
-       this.$store.state.websocket
-      ```
+```
+     this.$store.state.websocket
+```
      
-  ###日志记录
+###日志记录
   
-  采用laravel事件机制
+采用laravel事件机制
   
-    ```
-    Event::fire(new AdminLogger('delete', "删除了后台用户[{$user->username}]"));
-    ```
+```
+Event::fire(new AdminLogger('delete', "删除了后台用户[{$user->username}]"));
+``

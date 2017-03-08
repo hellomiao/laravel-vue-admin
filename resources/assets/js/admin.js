@@ -13,6 +13,7 @@ require('./bootstrap');
 import VueRouter from 'vue-router';
 import App from './App.vue';
 import VueResource from 'vue-resource';
+import VueProgressBar from 'vue-progressbar';
 
 require('admin-lte');
 require('jstree');
@@ -22,6 +23,11 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(util);
 
+Vue.use(VueProgressBar, {
+    color: '#00a65a',
+    failedColor: 'red',
+    height: '2px'
+})
 
 window.swal = require('sweetalert2');
 

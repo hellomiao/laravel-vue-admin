@@ -20,7 +20,7 @@ class Swoole extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = '后台消息推送socket';
 
     protected $ws;
 
@@ -43,11 +43,22 @@ class Swoole extends Command
     {
         $action = $this->argument('action');
         $this->ws = new \swoole_websocket_server("0.0.0.0", 9501);
-        $this->ws->set(['worker_num'=>8]);
-        $handler = new SwooleHandler();
-        $this->ws->on('Open',[$handler,'onOpen']);
-        $this->ws->on('Message',[$handler,'onMessage']);
-        $this->ws->on('Close',[$handler,'onClose']);
-        $this->ws->start();;
+        $this->ws->set(['worker_num' => 8]);
+        switch ($action) {
+            case 'start':
+                $handler = new SwooleHandler();
+                $this->ws->on('Open', [$handler, 'onOpen']);
+                $this->ws->on('Message', [$handler, 'onMessage']);
+                $this->ws->on('Close', [$handler, 'onClose']);
+                $this->ws->start();;
+                break;
+            case 'reload':
+                $this->ws->reload();;
+                break;
+            case 'stop':
+                $this->ws->stop();;
+                break;
+        }
+
     }
 }

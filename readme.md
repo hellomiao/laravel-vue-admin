@@ -44,7 +44,7 @@ php artisan swoole start
 websocket连接储存在Store模块里
     
 ```
-     this.$store.state.websocket
+this.$store.state.websocket
 ```
      
 ###日志记录

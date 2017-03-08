@@ -1,7 +1,7 @@
 <template>
 
     <div class="box-body table-responsive no-padding">
-        <top-progress :color="loadingColor" ref="topProgress"></top-progress>
+
     <table :class="['table table-bordered dataTable',stripped?'table-striped':'',hover?'table-hover':'']">
         <thead>
         <tr>
@@ -34,10 +34,10 @@
 <script>
     require('admin-lte/plugins/datatables/dataTables.bootstrap.css');
     import Pagination from './Pagination.vue';
-    import topProgress from 'vue-top-progress'
+
 
     export default{
-        components: {vPagination: Pagination,topProgress},
+        components: {vPagination: Pagination},
 
         data() {
             return {
@@ -156,7 +156,7 @@
                 this.loadList();
             },
             loadList: function () {
-                this.$refs.topProgress.start();
+                this.$Progress.start()
                 var that = this;
                 var url = this.ajax_url;
                 var sort = this.sort;
@@ -168,7 +168,7 @@
                 this.callHttp("POST",url,params, function (json) {
                     that.items = json.data;
                     that.total = json.total;
-                    that.$refs.topProgress.done()
+                    that.$Progress.finish()
                 });
             },
 

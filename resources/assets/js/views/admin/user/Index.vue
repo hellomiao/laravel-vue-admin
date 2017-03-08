@@ -31,12 +31,18 @@
                         :per-page="perPage"
                         :del="del"
                 >
+                    <template slot="isOnLine" scope="item">
+                        <i :class="['fa','fa-circle',item.item.isOnLine==1?'text-success':'text-danger']"></i>
+                    </template>
                     <template slot="username" scope="item">
-                        <img :src="item.item.picture" width="20px" height="20px" class="img-circle"/> {{item.item.username}}
+                        <img :src="item.item.picture" width="20px" height="20px" class="img-circle"/>
+                        {{item.item.username}}
                     </template>
                     <template slot="actions" scope="item">
                         <div class="btn-group">
                             <a href="#" @click.prevent="view(item.item.id)" class="btn btn-success btn-xs">查看</a>
+                            <a href="#" @click.prevent="msgBox(item.item)" class="btn btn-info
+                             btn-xs">消息</a>
                             <router-link :to="{ path: 'update/'+item.item.id}" class="btn bg-orange btn-xs">编辑
                             </router-link>
                             <a href="#" @click.prevent="$refs.table.onDel(item.item.id)" class="btn btn-danger btn-xs">删除</a>
@@ -78,6 +84,7 @@
 
 
 
+
     </div>
 
 </template>
@@ -91,16 +98,19 @@
                     id: {label: 'ID', sortable: true},
                     username: {label: '用户名'},
                     name: {label: '姓名'},
+                    isOnLine: {label: '在线'},
+                    created_at: {label: '添加时间', sortable: true},
                     actions: {label: '操作'}
                 },
                 user: {
-                    username: 'q',
+                    username: '',
                     password: '',
                     name: '',
                     phone: '',
                     rolesStr: '未分配',
                     picture: ''
                 },
+                text:'',
                 ajax_url: "/admin/user/index",
                 params: {keyword: ''},
                 total: 0,
@@ -123,27 +133,64 @@
                     setTimeout(function () {
                                 swal({
                                     title: "",
-                                    text: $("#user_view_box").html(),
-                                    html: true,
-                                    customClass:'user_view_box'
+                                    html: $("#user_view_box").html(),
+                                    customClass: 'user_view_box'
                                 });
                             }
                             , 100)
 
                 });
 
+            },
+            msgBox: function (item) {
+
+                var that = this;
+                var websocket = this.$store.state.websocket;
+                setTimeout(function () {
+                    $(that.$refs.msg_text).attr('id','msgText'+item.id)
+                    swal({
+                                title: "To:" + item.username,
+                                input: 'textarea',
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                                confirmButtonText: '发送',
+                                cancelButtonText: '取消'
+
+                            }).then(function (text) {
+
+                               var uid = item.id;
+                                var url = '/admin/user/send';
+                                that.callHttp("POST", url, {uid:uid,text:text}, function (json) {
+
+                                    if(json.status){
+                                        websocket.send(item.id);
+                                        swal({
+                                            title: "成功",
+                                            text: "发送成功",
+                                            timer: 2000,
+                                            showConfirmButton: false
+                                        });
+                                    }
+
+                                });
+                            });
+
+
+                }, 100)
+
+
             }
-
-
         }
     }
 </script>
 
 <style>
-    .user_view_box{
+    .user_view_box {
         width: 312px;
     }
-    .nav-stacked>li>a{
+
+    .nav-stacked > li > a {
         text-align: left;
     }
 </style>

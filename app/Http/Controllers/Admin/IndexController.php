@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Admin\Admin;
+use App\Models\Admin\Message;
 use App\Models\Admin\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -41,30 +42,49 @@ class IndexController extends Controller
                 array_push($permissionsArr, $val->name);
             }
         }
-        return view('admin.index',['permissions'=>json_encode($permissionsArr)]);
+        $msgNum=Message::query()->where('to_uid',$uid)->count();
+        return view('admin.index', ['permissions' => json_encode($permissionsArr),'msgNum'=>$msgNum]);
 
     }
+
+    /*
+     * 请求权限检查
+     */
 
     public function checkAcl()
     {
         $res = [];
-        $check=true;
+        $check = true;
         $path = Request::get('path');
         $routeName = implode('.', explode('/', substr($path, 1)));
-        $permission = Permission::where('name',$routeName)->first();
-        if($permission) {
+        $permission = Permission::where('name', $routeName)->first();
+        if ($permission) {
             $check = \Gate::check($routeName);
         }
         $res['status'] = $check;
         return response()->json($res);
     }
 
-
-
+    /*
+     * 获取侧边菜单
+     */
     public function menu()
     {
         $adminMenuData = Request::get('adminMenuData');
         return response()->json($adminMenuData);
+    }
+
+    /*
+     * 获取10条消息
+     */
+    public function msg()
+    {
+        $uid = auth('admin')->user()->id;
+
+        $list = Message::query()->with('users')->where('to_uid',$uid)->where('is_read',0)
+            ->orderBy('created_at','desc')->take(10)->get();
+
+        return response()->json($list);
     }
 
 }

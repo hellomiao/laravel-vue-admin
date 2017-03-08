@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Models\Admin;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Support\Facades\Redis;
 class Admin extends Authenticatable
 {
     use Notifiable;
     protected $softDelete = true;
-    protected $table='admin';
+    protected $table = 'admin';
+    protected $appends = ['isOnLine'];
+
 
     /**
      * The attributes that are mass assignable.
@@ -22,11 +25,13 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
     //用户角色
     public function roles()
     {
-        return $this->belongsToMany(Role::class,'admin_role_user','user_id','role_id');
+        return $this->belongsToMany(Role::class, 'admin_role_user', 'user_id', 'role_id');
     }
+
     // 判断用户是否具有某个角色
     public function hasRole($role)
     {
@@ -35,25 +40,29 @@ class Admin extends Authenticatable
         }
         return !!$role->intersect($this->roles)->count();
     }
+
     // 判断用户是否具有某权限
     public function hasPermission($permission)
     {
         if (is_string($permission)) {
-            $permission = Permission::where('name',$permission)->first();
+            $permission = Permission::where('name', $permission)->first();
             if (!$permission) return false;
         }
         return $this->hasRole($permission->roles);
     }
+
     // 给用户分配角色
     public function assignRole($role)
     {
         return $this->roles()->save($role);
     }
+
     //角色整体添加与修改
-    public function giveRoleTo(array $RoleId){
+    public function giveRoleTo(array $RoleId)
+    {
         $this->roles()->detach();
-        $roles=Role::whereIn('id',$RoleId)->get();
-        foreach ($roles as $v){
+        $roles = Role::whereIn('id', $RoleId)->get();
+        foreach ($roles as $v) {
             $this->assignRole($v);
         }
         return true;
@@ -61,11 +70,18 @@ class Admin extends Authenticatable
 
     public function getPictureAttribute($pic)
     {
-        if($pic) {
+        if ($pic) {
             return \Illuminate\Support\Facades\Storage::url($pic);
-        }else{
+        } else {
             return \Illuminate\Support\Facades\Storage::url('admin/noavatar.png');
         }
+    }
+
+    public function getIsOnLineAttribute()
+    {
+        $key=Redis::hExists('ADMIN_USERS', $this->id);
+        return $key;
+
     }
 
 }

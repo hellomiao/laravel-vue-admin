@@ -19,7 +19,7 @@ mix.js('resources/assets/js/admin.js', 'public/js')
     'node_modules/font-awesome/css/font-awesome.min.css',
     'node_modules/ionicons/dist/css/ionicons.min.css',
     'node_modules/toastr/toastr.scss',
-    'node_modules/sweetalert/dist/sweetalert.css',
+    'node_modules/sweetalert2/dist/sweetalert2.min.css'
 ], 'public/css/admin.css').combine([
         'resources/assets/js/binaryajax.js',
         'resources/assets/js/exif.js',

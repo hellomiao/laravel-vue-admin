@@ -52,13 +52,11 @@
     import { mapActions,mapGetters} from 'vuex';
     import Mheader from './Mheader.vue';
     import Sidebar from './Sidebar.vue';
-    import Cheader from './Cheader.vue';
 
     export default {
         components: {
             Mheader,
-            Sidebar,
-            Cheader
+            Sidebar
         },
         mounted () {
 

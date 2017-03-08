@@ -21,6 +21,7 @@ class CreateAdminMessageTable extends Migration {
 			$table->string('content', 500)->nullable()->comment('内容');
 			$table->boolean('is_read')->nullable()->default(0)->comment('0未读 1已读');
 			$table->integer('send_at')->unsigned()->nullable()->default(0)->comment('发送时间');
+			$table->integer('created_at')->unsigned()->nullable()->default(0)->comment('创建时间');
 		});
 	}
 

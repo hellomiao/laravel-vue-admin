@@ -109,7 +109,7 @@ class UserController extends Controller
         }
         $data = $user->toArray();
         $data['roles'] = $roles;
-        $data['rolesStr'] = $id==1?'管理员':(!empty($roleStr)?implode(',', $roleStr):'未分配');
+        $data['rolesStr'] = $id == 1 ? '管理员' : (!empty($roleStr) ? implode(',', $roleStr) : '未分配');
         return response()->json($data);
 
     }
@@ -126,7 +126,7 @@ class UserController extends Controller
             }
         }
         $data = $user->toArray();
-        $data['rolesStr'] = $id==1?'管理员':(!empty($roleStr)?implode(',', $roleStr):'未分配');
+        $data['rolesStr'] = $id == 1 ? '管理员' : (!empty($roleStr) ? implode(',', $roleStr) : '未分配');
         return response()->json($data);
 
     }
@@ -229,11 +229,20 @@ class UserController extends Controller
             if ($sort[0]) {
                 $query->orderBy($sort[0], $sort[1]);
             }
-//            $data['data']=$query->with(['users'=>function($query){
-//                $query->select('id','username');
-//            }])->get();
             $data['data'] = $query->get();
             return response()->json($data);
         }
+    }
+
+
+    public function send(Request $request)
+    {
+
+        $uid = $request->get('uid');
+        $msg = $request->get('text');
+        adminMsg($uid, $msg);
+        $res['status'] = true;
+        return response()->json($res);
+
     }
 }

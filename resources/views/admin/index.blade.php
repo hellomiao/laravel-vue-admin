@@ -26,6 +26,8 @@
 
         window.Permissions = {!!$permissions!!};
 
+        window.MsgNum = {!!$msgNum!!};
+
     </script>
 </head>
 <body class="skin-red sidebar-mini">

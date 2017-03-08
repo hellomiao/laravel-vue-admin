@@ -3,7 +3,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">{{name}}</span>
             <!-- logo for regular state and mobile devices -->
@@ -21,53 +21,32 @@
                 <ul class="nav navbar-nav">
 
                     <!-- Notifications: style can be found in dropdown.less -->
-                    <li class="dropdown notifications-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" @click="loadMsgList" data-toggle="dropdown">
                             <i class="fa fa-bell-o"></i>
                             <span class="label label-warning">{{msgNum}}</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">你有 {{msgNum}} 条未读消息</li>
                             <li>
-                                <!-- inner menu: contains the actual data -->
-                                <div class="slimScrollDiv"
-                                     style="position: relative; overflow: hidden; width: auto; height: 200px;">
-                                    <ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
-                                        <li>
+                                    <ul class="menu">
+                                        <li v-for="item in msgList"><!-- start message -->
                                             <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                <div class="pull-left">
+                                                    <img :src="item.users.picture"  class="img-circle" alt="User Image">
+                                                </div>
+                                                <h4>
+                                                     {{item.users.username}}
+                                                    <small><i class="fa fa-clock-o"></i> {{item.created_at}}</small>
+                                                </h4>
+                                                <p>{{item.content}}</p>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> Very long description here
-                                                that may not fit into the
-                                                page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"></i> 5 new members joined
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user text-red"></i> You changed your username
-                                            </a>
-                                        </li>
+
                                     </ul>
-                                    <div class="slimScrollBar"
-                                         style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div>
-                                    <div class="slimScrollRail"
-                                         style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-                                </div>
+
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
+                            <li class="footer"><a href="#">查看所有</a></li>
                         </ul>
                     </li>
 
@@ -82,7 +61,7 @@
 
                     </li>
                     <li>
-                        <a href="/admin/logout" @click.prevent="test"  class="">退出
+                        <a href="/admin/logout"  class="">退出
                         </a>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
@@ -103,7 +82,8 @@
             return {
                 user:window.User,
                 name:window.Name,
-                msgNum:0
+                msgNum:window.MsgNum,
+                msgList:{}
             }
         },
         created(){
@@ -117,7 +97,8 @@
             //onmessage 监听服务器数据推送
             websocket.onmessage = function (evt) {
                 that.msgNum= evt.data;
-                $(".notifications-menu").addClass('open');
+                $(".messages-menu").addClass('open');
+                that.loadMsgList();
 
             };
 
@@ -128,13 +109,16 @@
                 ...mapActions([
                     'websocket'
                 ]),
+                loadMsgList(){
+                    var url = '/admin/msg';
+                    this.callHttp("POST", url, {}, function (json) {
 
-            test(){
-                var websocket = this.$store.state.websocket,that=this;
-                var msg = {uid:9,text:45}
-                websocket.send(JSON.stringify(msg));
+                        this.msgList = json;
 
-            }
+
+                    });
+
+                }
 
         }
     }

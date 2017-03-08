@@ -2,11 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\AdminLogger;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AdminLoggertListener
+use App\Events\AdminMessage;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
+
+
+class AdminMessageListener
 {
     /**
      * Create the event listener.
@@ -22,17 +24,15 @@ class AdminLoggertListener
     /**
      * Handle the event.
      *
-     * @param  AdminLogger  $event
+     * @param  AdminMessage $event
      * @return void
      */
-    public function handle(AdminLogger $event)
+    public function handle(AdminMessage $event)
     {
         $model = $event->model;
-        $model->user_id = auth('admin')->user()->id;
-        $model->catalog = $event->catalog;
-        $model->url = url()->current();
-        $model->intro = $event->intro;
-        $model->ip = request()->ip();
+        $model->from_uid =auth('admin')->user()->id;
+        $model->to_uid = $event->to_uid;
+        $model->content = $event->content;
         $model->created_at = time();
         $model->save();
 

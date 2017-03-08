@@ -14,9 +14,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue';
 import VueResource from 'vue-resource';
 
-
 require('admin-lte');
-require('sweetalert');
 require('jstree');
 
 
@@ -25,6 +23,7 @@ Vue.use(VueResource);
 Vue.use(util);
 
 
+window.swal = require('sweetalert2');
 
 window.toastr=require('toastr');
 window.toastr.options = {

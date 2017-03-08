@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth:admin','menu']], function () {
 
     Route::post('user/info', ['uses' => 'UserController@info']);
     Route::post('user/set', ['uses' => 'UserController@set']);
+    Route::post('/msg', ['uses' => 'IndexController@msg']);
 
 
 });
@@ -36,6 +37,7 @@ Route::group(['middleware' => ['auth:admin', 'menu','authAdmin']], function () {
     Route::post('user/edit', ['as' => 'admin.user.info', 'uses' => 'UserController@edit']);  //用户管理
     Route::post('user/index', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);
     Route::post('user/logger', ['as' => 'admin.user.logger', 'uses' => 'UserController@logger']);
+    Route::post('user/send', ['as' => 'admin.user.send', 'uses' => 'UserController@send']);
     Route::resource('user', 'UserController', ['names' => ['store' => 'admin.user.create','update' => 'admin.user.edit']]);
 });
 

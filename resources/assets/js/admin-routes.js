@@ -8,7 +8,6 @@ export default [
     {
         path: '/admin',
         component: Main,
-        //beforeEnter: requireAuth,
         children: [
             {
                 path: 'permission',
@@ -96,12 +95,4 @@ export default [
     }
 ]
 
-function requireAuth(to, from, next) {
-alert(1)
-    return next()
-    //if (window.User) {
-    //    return next()
-    //} else {
-    //    return next('/admin/login')
-    //}
-}
+

@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Message extends Model
 {
@@ -10,7 +11,12 @@ class Message extends Model
 
     public $timestamps = false;
 
-    public function getSendAtAttribute($date)
+    public function users()
+    {
+        return $this->belongsTo(Admin::class, 'from_uid','id')->select(['id','username','picture']);
+    }
+
+    public function getCreatedAtAttribute($date)
     {
         return Carbon::parse(date("Y-m-d H:i:s",$date))->diffForHumans();
     }

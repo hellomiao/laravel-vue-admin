@@ -53,7 +53,7 @@
                     username: {label: '用户名',need:'users'},
                     url: {label: 'url'},
                     intro: {label: '内容'},
-                    created_at:{label:'操作时间'}
+                    created_at:{label:'操作时间', sortable: true}
                 },
                 ajax_url: "/admin/user/logger",
                 params: {keyword: ''},

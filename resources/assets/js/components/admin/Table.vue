@@ -180,11 +180,11 @@
                                 type: "warning",
                                 showCancelButton: true,
                                 cancelButtonText: "取消",
-                                confirmButtonColor: "#DD6B55",
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
                                 confirmButtonText: "删除",
                                 closeOnConfirm: true
-                            },
-                            function () {
+                            }).then(function () {
                                 var url = that.del.url+'/'+id;
                                 that.callHttp("DELETE", url, {}, function (json) {
                                     if (json.status) {

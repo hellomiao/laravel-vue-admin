@@ -14,7 +14,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'App\Events\AdminLogger' => [
-            'App\Listeners\AdminLoggertListener',
+            'App\Listeners\AdminLoggerListener',
+        ],
+        'App\Events\AdminMessage' => [
+            'App\Listeners\AdminMessageListener',
         ],
     ];
 

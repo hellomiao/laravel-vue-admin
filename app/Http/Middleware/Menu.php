@@ -48,9 +48,9 @@ class Menu
             $data = [];
             $uid = Auth::guard('admin')->user()->id;
             $user = Admin::find($uid);
-            $level0 = Permission::where('parent_id', '0')->get();
+            $level0 = Permission::where('parent_id', '0')->orderBy('order_num','asc')->get();
             foreach ($level0 as $key => $val) {
-                $level1 = Permission::where('parent_id', $val->id)->where('is_show', 1)->get()->toArray();
+                $level1 = Permission::where('parent_id', $val->id)->where('is_show', 1)->orderBy('order_num','asc')->get()->toArray();
                 foreach ($level1 as $k => $v) {
                     $level1[$k]['url'] = '/' . str_replace('.', '/', $v['name']);
                     if (!$user->hasPermission($v['name'])&&$uid!=1) {

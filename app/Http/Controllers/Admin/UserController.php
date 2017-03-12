@@ -77,6 +77,7 @@ class UserController extends Controller
 
         $user->password = bcrypt($request->get('password'));
         unset($user->roles);
+        $user->picture = upBase64Img($request->get('picture'), 'admin/avatar');
         $user->save();
         $roles = $request->get('roles');
         if (!empty($roles)) {

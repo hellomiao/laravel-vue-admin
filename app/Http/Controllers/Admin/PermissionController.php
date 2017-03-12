@@ -24,6 +24,7 @@ class PermissionController extends Controller
         'parent_id' => 0,
         'icon' => '',
         'is_show' => '',
+        'order_num' => 0,
     ];
 
     /**
@@ -31,7 +32,7 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $level = 0)
+    public function index()
     {
         $data = [];
         $permission = new Permission();
@@ -41,20 +42,6 @@ class PermissionController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($cid)
-    {
-        $data = [];
-        foreach ($this->fields as $field => $default) {
-            $data[$field] = old($field, $default);
-        }
-        $data['cid'] = $cid;
-        return view('admin.permission.create', $data);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -142,7 +129,7 @@ class PermissionController extends Controller
             $permission->roles()->detach($v->id);
         }
         $permission->delete();
-        Event::fire(new AdminLogger('create', "添加了后台权限[$permission->name]"));
+        Event::fire(new AdminLogger('delete', "删除了后台权限[$permission->name]"));
         $res['status'] = true;
         return response()->json($res);
     }

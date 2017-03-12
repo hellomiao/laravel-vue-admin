@@ -6,7 +6,7 @@
             </div>
         </div>
         <label for="exampleInputFile">{{label}}</label>
-        <input type="file" @change="test($event)" id="exampleInputFile">
+        <input type="file" @change="up($event)">
 
 
 
@@ -42,7 +42,7 @@
             }
         },
         methods: {
-            test(evt){
+            up(evt){
                 var file = evt.target.files[0], that = this; //获取file对象
                 //判断file的类型是不是图片类型。
                 if (!/image\/\w+/.test(file.type)) {

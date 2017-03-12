@@ -13,6 +13,7 @@ use App\Models\Admin\Admin;
 use App\Models\Admin\Message;
 use App\Models\Admin\Permission;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 
 
@@ -42,8 +43,8 @@ class IndexController extends Controller
                 array_push($permissionsArr, $val->name);
             }
         }
-        $msgNum=Message::query()->where('to_uid',$uid)->count();
-        return view('admin.index', ['permissions' => json_encode($permissionsArr),'msgNum'=>$msgNum]);
+        $msgNum = Message::query()->where('to_uid', $uid)->count();
+        return view('admin.index', ['permissions' => json_encode($permissionsArr), 'msgNum' => $msgNum]);
 
     }
 
@@ -81,10 +82,25 @@ class IndexController extends Controller
     {
         $uid = auth('admin')->user()->id;
 
-        $list = Message::query()->with('users')->where('to_uid',$uid)->where('is_read',0)
-            ->orderBy('created_at','desc')->take(10)->get();
+        $list = Message::query()->with('users')->where('to_uid', $uid)->where('is_read', 0)
+            ->orderBy('created_at', 'desc')->take(10)->get();
 
         return response()->json($list);
+    }
+
+
+    public function upImg()
+    {
+        $file = Request::file('wangEditorH5File');
+        $allowed_extensions = ["png", "jpg", "gif"];
+        if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) {
+            return 'error|You may only upload png, jpg or gif.';
+        }
+        $destinationPath = 'files/images/';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = date('ymdHis') . microtime(true) . rand(10, 99) . '.' . $extension;
+        $file->move($destinationPath, $fileName);
+        return asset($destinationPath . $fileName);
     }
 
 }

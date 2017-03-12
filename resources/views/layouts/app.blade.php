@@ -1,87 +1,164 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta charset="UTF-8">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title itemprop="name">Akina | Born for design</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta name="keywords" content="akina博客,Akina,akina主题,fuzzz主题" />
+    <meta name="description" content="Born for design" />
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+<body class="home blog custom-background hfeed">
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
+<!-- 移动端导航 -->
+<div id="mo-nav">
+    <ul id="menu-home" class="menu"><li><a href="http://www.akina.pw/home">首页</a></li>
+        <li><a href="http://www.akina.pw/archives">归档</a></li>
+        <li><a href="http://www.akina.pw/links">邻居</a></li>
+        <li><a href="http://www.akina.pw/about">关于我</a></li>
+        <li><a href="#">作品</a>
+            <ul class="sub-menu">
+                <li><a href="http://www.akina.pw/archives/category/theme">主题</a></li>
+                <li><a href="http://www.akina.pw/archives/category/myworks">My Works</a></li>
+                <li><a href="http://www.akina.pw/archives/category/%e6%91%84%e5%bd%b1">摄影</a></li>
+            </ul>
+        </li>
+        <li><a href="http://www.akina.pw/themeakina">Akina theme</a></li>
+    </ul>		</div>
+
+<div class="openNav">
+    <div class="iconflat">
+        <div class="icon"></div>
+    </div>
+    <div class="site-branding">
+        <!-- 如果设置logo则显示，反之显示博客名 -->
+        <div class="site-title"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akina3.png"></a></div>
+
+        <!-- logo end -->
+    </div><!-- .site-branding -->
+</div>
+
+
+<div id="page" class="site wrapper">
+
+    <header class="site-header" role="banner">
+        <div class="site-top">
+            <div class="site-branding">
+                <!-- 如果设置logo则显示，反之显示博客名 -->
+                <div class="site-title"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akina3.png"></a></div>
+
+                <!-- logo end -->
+
+            </div><!-- .site-branding -->
+
+            <div class="searchbox">
+                <i class="iconfont js-toggle-search iconsearch">&#xe603;</i>
+            </div>
+
+            <div class="lower">
+                <nav>
+                    <ul id="menu-home-1" class="menu"><li><a href="http://www.akina.pw/home">首页</a></li>
+                        <li><a href="http://www.akina.pw/archives">归档</a></li>
+                        <li><a href="http://www.akina.pw/links">邻居</a></li>
+                        <li><a href="http://www.akina.pw/about">关于我</a></li>
+                        <li><a href="#">作品</a>
+                            <ul class="sub-menu">
+                                <li><a href="http://www.akina.pw/archives/category/theme">主题</a></li>
+                                <li><a href="http://www.akina.pw/archives/category/myworks">My Works</a></li>
+                                <li><a href="http://www.akina.pw/archives/category/%e6%91%84%e5%bd%b1">摄影</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="http://www.akina.pw/themeakina">Akina theme</a></li>
+                    </ul>				<i class="iconfont show-nav">&#xe613;</i>
+                </nav><!-- #site-navigation -->
+            </div>
+
+        </div>
+    </header><!-- #masthead -->
+
+
+    <div class="blank"></div>
+
+
+    <div class="headertop">
+        <!-- #imgbox -->
+        <div id="centerbg">
+            <div class="slant-left"></div>
+            <div class="slant-right"></div>
+            <div class="focusinfo">
+                <div class="header-tou"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akinadeaava.jpg"></a></div>
+
+                <div class="header-info">
+                    <p>以此为傲 ，以此谋生， 以此热爱且不忘初衷</p>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                <div class="top-social">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                    <li><a href="http://weibo.com/fuzzz" target="_blank" class="social-sina" title="sina"><img src="http://www.akina.pw/wp-content/themes/akina/images/sina.png"/></a></li>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                    <li class="qq"><a href=""><img src="http://www.akina.pw/wp-content/themes/akina/images/qq.png"/></a>
+                        <div class="qqInner">
+                            444233806			</div>
+                    </li>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
+
+
+                    <li><a href="http://space.bilibili.com/15650984/#!/index" target="_blank" class="social-bili" title="bili"><img src="http://www.akina.pw/wp-content/themes/akina/images/bilibili.png"/></a></li>
+
+
+
                 </div>
             </div>
-        </nav>
 
+        </div>
+
+        <div id="content" class="site-content">
         @yield('content')
-    </div>
+        </div><!-- #content -->
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="site-info">
+                Copyright © 2017 by Akina . All rights reserved.			<span class="sep"> | </span>
+                <!-- ！！！！！！！！！！！！请尊重作者，此主题免费，请不要修改版权，谢谢 -->
+                Theme: Akina by <a href="http://www.akina.pw" rel="designer">Fuzzz</a>.			<div class="footertext">
+                    <p>Carpe Diem and Do what I like</p>
+                </div>
+            </div><!-- .site-info -->
+        </footer><!-- #colophon -->
+
+
+        <a href="#" class="cd-top"></a>
+
+        <!-- search start -->
+        <form class="js-search search-form search-form--modal" method="get" action="http://www.akina.pw" role="search">
+            <div class="search-form__inner">
+                <div>
+                    <p class="micro mb-">你想搜索什么...</p>
+                    <i class="iconfont">&#xe603;</i>
+                    <input class="text-input" type="search" name="s" placeholder="搜索...">
+                </div>
+            </div>
+        </form>
+        <!-- search end -->
+
+
+                </div>
+
+
+
 </body>
 </html>

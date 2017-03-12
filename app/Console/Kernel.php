@@ -14,7 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        Commands\Swoole::class
+        Commands\Swoole::class,
+        Commands\Taobao::class,
+        Commands\Music163::class
     ];
 
     /**

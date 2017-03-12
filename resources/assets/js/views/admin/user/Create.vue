@@ -67,7 +67,6 @@
         },
         methods: {
             add(){
-                console.log(this.user)
                 var url = '/admin/user';
                 var that = this, roleArr = [];
 

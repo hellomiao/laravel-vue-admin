@@ -142,6 +142,11 @@
     },
     mounted () {
         this.loadList();
+
+
+        this.$parent.$on('reload', () => {
+            this.loadList();
+        })
     },
         methods: {
             headClick(field, key) {

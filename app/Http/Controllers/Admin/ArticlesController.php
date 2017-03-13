@@ -23,9 +23,11 @@ class ArticlesController extends Controller
         'title' => '',
         'category_id' => '',
         'picture' => '',
+        'tags' => '',
         'info' => '',
         'content' => '',
     ];
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -78,12 +80,14 @@ class ArticlesController extends Controller
     {
         $id = $request->get('id');
         $articles = Articles::find($id);
-        $data=$articles->toArray();
+        $data = $articles->toArray();
 
         if ($articles->category) {
-                $data['category']= ['label' => $articles->category->name, 'value' => $articles->category->id];
-
+            $data['category'] = ['label' => $articles->category->name, 'value' => $articles->category->id];
         }
+
+        //$data['tags'] = explode(',', $articles->tags);
+
         return response()->json($data);
 
     }
@@ -105,11 +109,25 @@ class ArticlesController extends Controller
 
     public function destroy($id)
     {
-        $articles = Articles::find((int)$id);
+        $articles = Articles::find($id);
         $articles->delete();
         Event::fire(new AdminLogger('delete', "删除了文章[{$articles->title}]"));
         $res['status'] = true;
         return response()->json($res);
+    }
+
+    /*
+     * 推荐
+     */
+    public function isHot(Request $request)
+    {
+        $id = $request->get('id');
+        $articles = Articles::find($id);
+        $articles->is_hot == 1 ? $articles->is_hot = 0 : $articles->is_hot = 1;
+        $articles->save();
+        $res['status'] = true;
+        return response()->json($res);
+
     }
 
 }

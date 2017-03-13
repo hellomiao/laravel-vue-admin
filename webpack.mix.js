@@ -26,4 +26,7 @@ mix.js('resources/assets/js/admin.js', 'public/js')
         'public/js/admin.js','resources/assets/js/style.js'],
     'public/js/admin/admin.js');
 
+mix.combine(['resources/assets/css/style.css'],'public/css/web.css')
+    .combine(['resources/assets/js/web.js'],'public/js/web.js');
+
 

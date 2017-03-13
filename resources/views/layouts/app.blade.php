@@ -12,7 +12,7 @@
     <meta name="description" content="Born for design" />
 
     <!-- Styles -->
-    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/web.css" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -26,7 +26,7 @@
 
 <!-- 移动端导航 -->
 <div id="mo-nav">
-    <ul id="menu-home" class="menu"><li><a href="http://www.akina.pw/home">首页</a></li>
+    <ul id="menu-home" class="menu"><li><a href="{{URL::route('home')}}">首页</a></li>
         <li><a href="http://www.akina.pw/archives">归档</a></li>
         <li><a href="http://www.akina.pw/links">邻居</a></li>
         <li><a href="http://www.akina.pw/about">关于我</a></li>
@@ -46,7 +46,7 @@
     </div>
     <div class="site-branding">
         <!-- 如果设置logo则显示，反之显示博客名 -->
-        <div class="site-title"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akina3.png"></a></div>
+        <div class="site-title"><a href="{{URL::route('home')}}" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akina3.png"></a></div>
 
         <!-- logo end -->
     </div><!-- .site-branding -->
@@ -59,7 +59,7 @@
         <div class="site-top">
             <div class="site-branding">
                 <!-- 如果设置logo则显示，反之显示博客名 -->
-                <div class="site-title"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akina3.png"></a></div>
+                <div class="site-title"><a href="{{URL::route('home')}}" >蜗牛笔记</a></div>
 
                 <!-- logo end -->
 
@@ -75,13 +75,6 @@
                         <li><a href="http://www.akina.pw/archives">归档</a></li>
                         <li><a href="http://www.akina.pw/links">邻居</a></li>
                         <li><a href="http://www.akina.pw/about">关于我</a></li>
-                        <li><a href="#">作品</a>
-                            <ul class="sub-menu">
-                                <li><a href="http://www.akina.pw/archives/category/theme">主题</a></li>
-                                <li><a href="http://www.akina.pw/archives/category/myworks">My Works</a></li>
-                                <li><a href="http://www.akina.pw/archives/category/%e6%91%84%e5%bd%b1">摄影</a></li>
-                            </ul>
-                        </li>
                         <li><a href="http://www.akina.pw/themeakina">Akina theme</a></li>
                     </ul>				<i class="iconfont show-nav">&#xe613;</i>
                 </nav><!-- #site-navigation -->
@@ -95,39 +88,11 @@
 
 
     <div class="headertop">
-        <!-- #imgbox -->
-        <div id="centerbg">
-            <div class="slant-left"></div>
-            <div class="slant-right"></div>
-            <div class="focusinfo">
-                <div class="header-tou"><a href="http://www.akina.pw" ><img src="http://7xwpo4.com1.z0.glb.clouddn.com/wp-content/uploads/2016/07/akinadeaava.jpg"></a></div>
 
-                <div class="header-info">
-                    <p>以此为傲 ，以此谋生， 以此热爱且不忘初衷</p>
-                </div>
-
-                <div class="top-social">
-
-                    <li><a href="http://weibo.com/fuzzz" target="_blank" class="social-sina" title="sina"><img src="http://www.akina.pw/wp-content/themes/akina/images/sina.png"/></a></li>
-
-                    <li class="qq"><a href=""><img src="http://www.akina.pw/wp-content/themes/akina/images/qq.png"/></a>
-                        <div class="qqInner">
-                            444233806			</div>
-                    </li>
-
-
-
-                    <li><a href="http://space.bilibili.com/15650984/#!/index" target="_blank" class="social-bili" title="bili"><img src="http://www.akina.pw/wp-content/themes/akina/images/bilibili.png"/></a></li>
-
-
-
-                </div>
-            </div>
-
-        </div>
 
         <div id="content" class="site-content">
         @yield('content')
+
         </div><!-- #content -->
 
         <footer id="colophon" class="site-footer" role="contentinfo">
@@ -159,6 +124,6 @@
                 </div>
 
 
-
+    <script src="/js/web.js"></script>
 </body>
 </html>

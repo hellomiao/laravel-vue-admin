@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as'=>'home','uses' => 'HomeController@index']);
 
 Auth::routes();
-Route::get('archives/{id}', ['uses' => 'ArticlesController@detail']);
+Route::get('archives/{id}', ['as'=>'articles.detail','uses' => 'ArticlesController@detail']);
+Route::get('archives/tag/{tag}', ['as'=>'articles.tag','uses' => 'ArticlesController@tag']);

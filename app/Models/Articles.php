@@ -9,6 +9,7 @@
 namespace App\Models;
 
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Articles extends Model
@@ -27,6 +28,11 @@ class Articles extends Model
         } else {
             return \Illuminate\Support\Facades\Storage::url('nopic.png');
         }
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->diffForHumans();
     }
 
 }

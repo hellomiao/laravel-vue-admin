@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * 消息事件
+ */
 namespace App\Events;
 
 

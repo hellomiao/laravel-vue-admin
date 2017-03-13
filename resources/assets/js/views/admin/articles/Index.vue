@@ -35,9 +35,13 @@
                         <img :src="item.item.picture" width="20px" height="20px" class="img-circle"/>
                         {{item.item.title}}
                     </template>
+                    <template slot="is_hot" scope="item">
+                        <span v-if="item.item.is_hot" @click="hot(item.item.id)" class="label label-success">已推荐</span>
+                        <span v-else @click="hot(item.item.id)" class="label label-danger">推荐</span>
+                    </template>
                     <template slot="actions" scope="item">
                         <div class="btn-group">
-                            <router-link :to="{ path: 'setacl/'+item.item.id}" class="btn bg-purple btn-xs">设置权限</router-link>
+                            <router-link :to="{ path: 'setacl/'+item.item.id}" class="btn bg-purple btn-xs">查看</router-link>
                             <router-link :to="{ path: 'update/'+item.item.id}" class="btn bg-orange btn-xs">编辑</router-link>
                             <a href="#"  @click.prevent="$refs.table.onDel(item.item.id)"  class="btn btn-danger btn-xs">删除</a>
                         </div>
@@ -59,7 +63,8 @@
                 fields: {
                     id: {label: 'ID', sortable: true},
                     title: {label: '标题'},
-                    created_at: {label: '添加时间'},
+                    created_at: {label: '添加时间', sortable: true},
+                    is_hot:{label:'是否推荐', sortable: true},
                     actions: {label: '操作'}
                 },
                 ajax_url: "/admin/articles/index",
@@ -67,7 +72,7 @@
                 total: 0,
                 currentPage: 1,
                 perPage: 15,
-                del: {url:'/admin/articles',title:'确定要删除角色吗?',successText:'删除后台角色成功!'},
+                del: {url:'/admin/articles',title:'确定要删除文章吗?',successText:'删除文章成功!'},
             }
         },
         watch: {},
@@ -75,8 +80,15 @@
 
         },
         methods: {
-
-
+            hot(id){
+                var url = '/admin/articles/isHot';
+                this.callHttp("POST",url,{id:id},function(json){
+                    if(json.status) {
+                        toastr.success('操作成功!')
+                        this.$emit('reload');
+                    }
+                });
+            }
         }
     }
 </script>

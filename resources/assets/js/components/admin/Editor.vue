@@ -1,5 +1,5 @@
  <template>
-     <div id="editor" style="height:400px">
+     <div :id="id" style="height:400px">
 
      </div>
  </template>
@@ -13,28 +13,31 @@
              }
          },
          props: {
-             content: {
+             id: {
+                 type: String,
+                 default: 'editor'
+             },
+             html: {
                  type: String,
                  default: null
              }
 
          },
          watch:{
-             content(){
-                 if(this.content!=null){
-                     this.editor.$txt.html(this.content)
+             html(){
+                 if(this.html!=null){
+                     this.editor.$txt.html(this.html)
                  }
              }
          },
          mounted(){
-             var editor = new wangEditor('editor'),self=this;
+             var editor = new wangEditor(this.id),self=this;
              editor.config.uploadImgUrl = '/admin/upImg';
 
              editor.config.uploadParams = {
                  _token:  Laravel.csrfToken
              };
 
-             // 普通的自定义菜单
              editor.onchange = function () {
                  // onchange 事件中更新数据
                  var content = editor.$txt.html();

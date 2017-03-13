@@ -1,15 +1,16 @@
 <?php
-
+/*
+ * 日志事件
+ */
 namespace App\Events;
 
 use App\Models\Admin\Logger;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+
 
 class AdminLogger
 {

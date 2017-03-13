@@ -25,11 +25,14 @@
                         <label>简介</label>
                         <textarea class="form-control" name="description" v-model="article.info" rows="3" placeholder="输入简介"></textarea>
                     </div>
-
+                    <div class="form-group">
+                        <label>标签</label>
+                        <tag v-on:tags="getTags" :tags="article.tags" id="tags"></tag>
+                    </div>
 
                     <div class="form-group">
                         <label>内容</label>
-                        <editor :content="article.content" v-on:content="getContent"></editor>
+                        <editor :html="article.content" v-on:content="getContent" id="content"></editor>
                     </div>
 
                 </div>
@@ -46,13 +49,15 @@
     import vSelect from 'vue-select';
     import ImageUpload  from '../../../components/admin/ImageUpload.vue';
     import Editor  from '../../../components/admin/Editor.vue';
+    import TagEditor  from '../../../components/admin/TagEditor.vue';
     export default{
-        components: {vSelect, 'image-upload': ImageUpload,Editor},
+        components: {vSelect, 'image-upload': ImageUpload,Editor, 'tag': TagEditor},
         data () {
             return{
                 article:{
                     category_id:'',
                     picture:'',
+                    tags: '',
                     title:'',
                     info:'',
                     content:""
@@ -63,7 +68,7 @@
                 categoryOptions: []
             }
         },
-        created () {
+        mounted () {
 
             this.init();
 
@@ -100,6 +105,9 @@
             },
             getContent(value){
                 this.article.content = value;
+            },
+            getTags(value){
+                this.article.tags = value;
             }
         }
 

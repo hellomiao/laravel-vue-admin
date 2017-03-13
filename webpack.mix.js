@@ -11,8 +11,7 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/admin.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css').combine([
+mix.js('resources/assets/js/admin.js', 'public/js').combine([
     'node_modules/bootstrap3/dist/css/bootstrap.min.css',
     'node_modules/admin-lte/dist/css/AdminLTE.min.css',
     'node_modules/admin-lte/dist/css/skins/_all-skins.min.css',
@@ -26,7 +25,7 @@ mix.js('resources/assets/js/admin.js', 'public/js')
         'public/js/admin.js','resources/assets/js/style.js'],
     'public/js/admin/admin.js');
 
-mix.combine(['resources/assets/css/style.css'],'public/css/web.css')
-    .combine(['resources/assets/js/web.js'],'public/js/web.js');
-
+mix.sass('resources/assets/sass/web.scss', 'public/css')
+    .js('resources/assets/js/web.js','public/js');
+mix.copy('resources/assets/images/logo.png', 'public/images/logo.png');
 

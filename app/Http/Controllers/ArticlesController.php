@@ -16,8 +16,12 @@ class ArticlesController extends Controller
 
     public function detail($id){
         $articles = Articles::find($id);
+        $articles->increment('view_num',1);
         $articles->tags = explode(',',$articles->tags);
         return view('articles.detail',['articles'=>$articles]);
     }
+
+
+
 
 }

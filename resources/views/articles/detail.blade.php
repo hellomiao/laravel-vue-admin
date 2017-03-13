@@ -14,12 +14,13 @@
 
                 <div class="entry-content">
                     {!! $articles->content !!}
+                    </div>
 
                 <footer class="post-footer">
                     <div class="post-tags">
                         <i class="iconfont">&#xe613;</i>
                         @foreach($articles->tags as $key=>$val)
-                        <a href="http://www.akina.pw/archives/tag/akina" rel="tag">{{$val}}</a>
+                        <a href="" rel="tag">{{$val}}</a>
                         @endforeach
                     </div>
 
@@ -30,24 +31,7 @@
                         </a>
                     </div>
 
-                    <div class="post-share">
-                        <!-- JiaThis Button BEGIN -->
-                        <div class="jiathis_style_32x32">
-                            <a class="jiathis_button_qzone"></a>
-                            <a class="jiathis_button_tsina"></a>
-                            <a class="jiathis_button_tqq"></a>
-                            <a class="jiathis_button_weixin"></a>
-                            <a class="jiathis_button_renren"></a>
-                            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-                        </div>
-                        <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>
-                        <!-- JiaThis Button END -->
-                        <!-- UJian Button BEGIN -->
-                        <div class="ujian-hook"></div>
-                        <script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js"></script>
-                        <!-- UJian Button END -->
 
-                    </div>
                 </footer><!-- .entry-footer -->
             </article><!-- #post-## -->
 

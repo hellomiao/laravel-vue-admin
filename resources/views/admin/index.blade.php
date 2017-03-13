@@ -30,7 +30,7 @@
 
     </script>
 </head>
-<body class="skin-red sidebar-mini">
+<body class="sidebar-mini skin-purple-light">
 <div id="app"></div>
 <script src="/js/admin/admin.js"></script>
 </body>

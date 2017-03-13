@@ -11,10 +11,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 
 class Articles extends Model
 {
     protected $table = 'articles';
+    protected $appends = ['url'];
 
     public function category()
     {
@@ -35,4 +37,9 @@ class Articles extends Model
         return Carbon::parse($date)->diffForHumans();
     }
 
+    public function getUrlAttribute()
+    {
+        return URL::route('articles.detail',['id'=>$this->id]);
+
+    }
 }

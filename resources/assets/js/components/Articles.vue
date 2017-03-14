@@ -51,7 +51,7 @@
     export default{
         data() {
             return {
-                nowPage: 0,
+                nowPage: 1,
                 switchShow: false,
                 alist: []
             };

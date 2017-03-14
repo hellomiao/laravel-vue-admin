@@ -2,6 +2,9 @@
 
 这是一个laravel5.4+vue2.0构建的后台管理系统,主题是AdminLte.主要功能包括权限树管理,角色管理,用户管理,操作日志等。
 
+
+[博客](https://www.woniubiji.com/)
+
 ###用户管理
 
  ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/users.png)
@@ -26,6 +29,17 @@
 ###操作日志
 
   ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/logger.png)
+  
+###新增博客
+
+两天简单撸了个博客还没有评论功能,界面扒的别人的,设计天赋有限。
+  
+   ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/blog_admin.png)
+   
+   ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/blog_admin1.png)
+   
+   ![image](https://github.com/hellomiao/laravel-vue-admin/raw/master/screenshots/blog.png)
+   
   
   
 ###前端vue权限方法,can('别名')

@@ -56,7 +56,7 @@ class HomeController extends Controller
         $keyword = isset($params['keyword']) ? $params['keyword'] : '';
         $category_id = isset($params['category_id']) ? $params['category_id'] : '';
         $page = $params['page'];
-        $perPage = 3;
+        $perPage = 10;
         $start = ($page - 1) * $perPage;
         $query = Articles::query();
         if ($category_id) {

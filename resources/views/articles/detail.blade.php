@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('title')
+    @parent
+    {{$articles->title}}
+@stop
 @section('content')
 
     <div id="primary" class="content-area">

@@ -6,10 +6,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title itemprop="name">蜗牛笔记</title>
-
-    <meta name="keywords" content=""/>
-    <meta name="description" content="Born for design"/>
+    <title itemprop="name">@yield('title','蜗牛笔记')</title>
+    <meta name="keywords" content="网易云热评,php"/>
+    <meta name="description" content="heypigg"/>
     <link rel="shortcut icon" href="/favicon.ico" />
 
     <!-- Styles -->

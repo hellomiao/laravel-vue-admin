@@ -55,6 +55,6 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::post('articles/isHot', ['as' => 'admin.articles.isHot', 'uses' => 'ArticlesController@isHot']);
     Route::post('articles/category', ['as' => 'admin.articles.create', 'uses' => 'ArticlesController@category']);
     Route::post('articles/index', ['as' => 'admin.articles.index', 'uses' => 'ArticlesController@index']);
-    Route::resource('articles', 'articlesController', ['names' => ['update' => 'admin.articles.edit', 'store' => 'admin.articles.create']]);
+    Route::resource('articles', 'ArticlesController', ['names' => ['update' => 'admin.articles.edit', 'store' => 'admin.articles.create']]);
 });
 

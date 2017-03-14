@@ -12,11 +12,11 @@
                             <img width="150" height="150" :src="item.picture"
                                  class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""></a>
                     </div>
-                    <h1 class="entry-title"><a :href="item.url">@{{item.title}}</a></h1>
+                    <h1 class="entry-title"><a :href="item.url">{{item.title}}</a></h1>
                     <div class="p-time">
-                        <i class="iconfont">&#xe604;</i> @{{item.created_at}}
+                        <i class="iconfont">&#xe604;</i> {{item.created_at}}
                     </div>
-                    <p>@{{item.info}}</p>
+                    <p>{{item.info}}</p>
 
 
                     <footer class="entry-footer">
@@ -29,7 +29,7 @@
                         条评论</a></span>
                             </div>
                             <div class="views">
-                                <span><i class="iconfont">&#xe614;</i> @{{item.view_num}} 点击</span>
+                                <span><i class="iconfont">&#xe614;</i> {{item.view_num}} 点击</span>
                             </div>
                         </div>
                     </footer><!-- .entry-footer -->

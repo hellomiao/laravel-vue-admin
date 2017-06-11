@@ -2,9 +2,10 @@
 
     <div class="box-body table-responsive no-padding">
 
-    <table :class="['table table-bordered dataTable',stripped?'table-striped':'',hover?'table-hover':'']">
+    <table :class="['table dataTable',stripped?'table-striped':'',hover?'table-hover':'']">
         <thead>
         <tr>
+            <th v-if="checkbox"></th>
             <th @click="headClick(field,key)"
                 :class="[field.sortable?'sorting':null,sort===key?'sorting_'+(sortDesc?'desc':'asc'):'']"
                 v-for="field,key in fields"
@@ -15,6 +16,7 @@
         </thead>
         <tbody>
         <tr v-for="item in _items" :key="items_key" :class="[item.state?'table-'+item.state:null]">
+            <td v-if="checkbox"><input type="checkbox"/></td>
             <td v-for="(field,key) in fields">
                 <slot :name="key" :value="field.need?item[field.need][key]:item[key]" :item="item">{{field.need?item[field.need][key]:item[key]}}</slot>
             </td>
@@ -33,9 +35,8 @@
 
 <script>
     require('admin-lte/plugins/datatables/dataTables.bootstrap.css');
+    require('icheck/skins/minimal/_all.css');
     import Pagination from './Pagination.vue';
-
-
     export default{
         components: {vPagination: Pagination},
 
@@ -55,7 +56,10 @@
                 type: Boolean,
                 default: false
             },
-
+            checkbox: {
+                type: Boolean,
+                default: false
+            },
             fields: {
                 type: Object,
                 default: () => {
@@ -134,19 +138,28 @@
 
         }
     },
-    created () {
+    updated () {
 
-
+        $(":checkbox").iCheck({
+            labelHover : false,
+            cursor : true,
+            checkboxClass : 'icheckbox_minimal-blue',
+            radioClass : 'iradio_minimal-blue',
+            increaseArea : '20%'
+        });
 
 
     },
     mounted () {
+
         this.loadList();
 
 
         this.$parent.$on('reload', () => {
             this.loadList();
-        })
+        });
+
+
     },
         methods: {
             headClick(field, key) {
@@ -173,8 +186,9 @@
                 this.callHttp("POST",url,params, function (json) {
                     that.items = json.data;
                     that.total = json.total;
-                    that.$Progress.finish()
+                    that.$Progress.finish();
                 });
+
             },
 
                 onDel: function (id) {

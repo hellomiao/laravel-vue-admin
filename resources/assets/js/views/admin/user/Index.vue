@@ -2,23 +2,15 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <router-link :to="{path:'create'}" v-if="can('admin.user.create')" class="btn btn-success btn-md">
-                        <i class="fa fa-plus-circle"></i> 添加用户
-                    </router-link>
 
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                            <input type="text" name="keyword" v-model="params.keyword" class="form-control pull-right"
-                                   placeholder="请输入要帐号或者姓名">
-
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default" @click="$refs.table.loadList()"><i
-                                        class="fa fa-search"></i></button>
-                            </div>
+                <listHeader table="123">
+                    <template slot="form">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><strong>Id</strong></span>
+                            <input type="text" v-model="params.keyword" class="form-control" placeholder="Id" name="id" value="">
                         </div>
-                    </div>
-                </div>
+                    </template>
+                </listHeader>
 
                 <vTable ref="table"
                         stripped
@@ -30,6 +22,7 @@
                         :current-page="currentPage"
                         :per-page="perPage"
                         :del="del"
+                        :checkbox="checkbox"
                 >
                     <template slot="isOnLine" scope="item">
                         <i :class="['fa','fa-circle',item.item.isOnLine==1?'text-success':'text-danger']"></i>
@@ -41,7 +34,8 @@
                     <template slot="actions" scope="item">
                         <div class="btn-group">
                             <a href="#" @click.prevent="view(item.item.id)" class="btn btn-success btn-xs">查看</a>
-                            <a href="#" @click.prevent="msgBox(item.item)" v-if="can('admin.user.msg')&&item.item.id!=$store.state.uid" class="btn btn-info
+                            <a href="#" @click.prevent="msgBox(item.item)"
+                               v-if="can('admin.user.msg')&&item.item.id!=$store.state.uid" class="btn btn-info
                              btn-xs">消息</a>
                             <router-link :to="{ path: 'update/'+item.item.id}" class="btn bg-orange btn-xs">编辑
                             </router-link>
@@ -82,9 +76,6 @@
         </div>
 
 
-
-
-
     </div>
 
 </template>
@@ -94,6 +85,7 @@
         data () {
             return {
                 items: [],
+                checkbox: true,
                 fields: {
                     id: {label: 'ID', sortable: true},
                     username: {label: '用户名'},
@@ -110,7 +102,7 @@
                     rolesStr: '未分配',
                     picture: ''
                 },
-                text:'',
+                text: '',
                 ajax_url: "/admin/user/index",
                 params: {keyword: ''},
                 total: 0,
@@ -147,34 +139,34 @@
                 var that = this;
                 var websocket = this.$store.state.websocket;
                 setTimeout(function () {
-                    $(that.$refs.msg_text).attr('id','msgText'+item.id)
+                    $(that.$refs.msg_text).attr('id', 'msgText' + item.id)
                     swal({
-                                title: "To:" + item.username,
-                                input: 'textarea',
-                                showCancelButton: true,
-                                closeOnConfirm: false,
-                                showLoaderOnConfirm: true,
-                                confirmButtonText: '发送',
-                                cancelButtonText: '取消'
+                        title: "To:" + item.username,
+                        input: 'textarea',
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true,
+                        confirmButtonText: '发送',
+                        cancelButtonText: '取消'
 
-                            }).then(function (text) {
+                    }).then(function (text) {
 
-                               var uid = item.id;
-                                var url = '/admin/user/send';
-                                that.callHttp("POST", url, {uid:uid,text:text}, function (json) {
+                        var uid = item.id;
+                        var url = '/admin/user/send';
+                        that.callHttp("POST", url, {uid: uid, text: text}, function (json) {
 
-                                    if(json.status){
-                                        websocket.send(item.id);
-                                        swal({
-                                            title: "成功",
-                                            text: "发送成功",
-                                            timer: 2000,
-                                            showConfirmButton: false
-                                        });
-                                    }
-
+                            if (json.status) {
+                                websocket.send(item.id);
+                                swal({
+                                    title: "成功",
+                                    text: "发送成功",
+                                    timer: 2000,
+                                    showConfirmButton: false
                                 });
-                            });
+                            }
+
+                        });
+                    });
 
 
                 }, 100)

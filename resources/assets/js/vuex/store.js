@@ -9,8 +9,7 @@ import * as mutations from './mutations.js';
 Vue.use(Vuex);
 
 const state = {
-    websocket:Object,
-    uid:window.User.id
+
 };
 
 export default new Vuex.Store({

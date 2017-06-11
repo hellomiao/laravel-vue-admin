@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import util from './util.js';
-import store from './vuex/store.js';
+import store from './admin-vuex/store.js';
 import routes from './admin-routes.js';
 
 require('./bootstrap');
@@ -15,6 +15,7 @@ import App from './App.vue';
 import VueResource from 'vue-resource';
 import VueProgressBar from 'vue-progressbar';
 
+require('icheck');
 require('admin-lte');
 require('jstree');
 
@@ -43,11 +44,15 @@ window.toastr.options = {
     showMethod: "fadeIn",
     hideMethod: "fadeOut"
 };
-
+var bus = new Vue();
 Vue.component(
     'vTable',
     require('./components/admin/Table.vue')
 );
+Vue.component(
+    'listHeader',
+    require('./components/admin/ListHeader.vue')
+)
 
 
 // 3. 创建 router 实例，然后传 `routes` 配置

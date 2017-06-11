@@ -1,40 +1,34 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <title>@yield('title')|{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Styles -->
+    <link href="/css/web.css" rel="stylesheet">
 
-
-
-
-    <div class="top-feature">
-        <h1 class="fes-title">推荐</h1>
-        <div class="feature-content">
-            @foreach($hot as $key=>$val)
-                <li class="feature-1"><a href="{{$val->url}}" target="_blank">
-                        <div class="feature-title"><span class="foverlay">{{$val->title}}</span></div>
-                        <img src="{{$val->picture}}"></a></li>
-            @endforeach
-        </div>
-    </div>
-
-
-    <div id="primary" class="content-area">
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
 
 
-        <articles url="/"></articles>
-
-
-    </div><!-- #primary -->
-
-
-    </div><!-- #content -->
+        window.Name='{!! config('app.name', 'Laravel') !!}';
 
 
 
 
-
-    </body>
-    </html>
-
-@endsection
+    </script>
+</head>
+<body class="sidebar-mini skin-purple-light">
+<div id="app"></div>
+<script src="/js/web.js"></script>
+</body>
+</html>

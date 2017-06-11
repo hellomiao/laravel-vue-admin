@@ -25,7 +25,7 @@ mix.js('resources/assets/js/admin.js', 'public/js').combine([
         'public/js/admin.js','resources/assets/js/style.js'],
     'public/js/admin/admin.js');
 
-mix.sass('resources/assets/sass/web.scss', 'public/css')
+mix.combine(['resources/assets/css/style.scss'], 'public/css/web.css')
     .js('resources/assets/js/web.js','public/js');
 mix.copy('resources/assets/images/logo.png', 'public/images/logo.png');
 

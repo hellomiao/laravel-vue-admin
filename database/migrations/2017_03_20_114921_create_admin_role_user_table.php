@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRoleUserTable extends Migration {
+class CreateAdminRoleUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateRoleUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('role_user', function(Blueprint $table)
+		Schema::create('admin_role_user', function(Blueprint $table)
 		{
 			$table->integer('user_id')->unsigned();
 			$table->integer('role_id')->unsigned()->index('role_user_role_id_foreign');
@@ -28,7 +28,7 @@ class CreateRoleUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('role_user');
+		Schema::drop('admin_role_user');
 	}
 
 }
